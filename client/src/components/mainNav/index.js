@@ -24,7 +24,7 @@ export default function MainNav(props) {
                 </NavLink>
             </Menu.Item>
             <Menu.Item key="top">
-                <NavLink to="top">
+                <NavLink to="/top">
                     Top Rated
                 </NavLink>
             </Menu.Item>

@@ -11,7 +11,7 @@ import SingleAnime from './pages/singleAnime';
 import Popular from './pages/popular';
 import TopRated from './pages/topRated';
 import Discover from './pages/discover';
-import Search from './pages/search';
+import SearchPage from './pages/search';
 import MainNav from './components/mainNav';
 
 import './App.css';
@@ -41,7 +41,7 @@ function App() {
                 <Discover />
               </Route>
               <Route path="/search" exact>
-                <Search />
+                <SearchPage />
               </Route>
               <Route path="/anime/:id">
                 <SingleAnime />
@@ -49,7 +49,7 @@ function App() {
               <Redirect to="/" />
           </Switch>
         </Content>
-          <Footer style={{ textAlign: 'center' }}>MyAnimeDash 2020 Created by SirKev</Footer>
+          <Footer style={{ textAlign: 'center' }}>Hello 2020 Created by SirKev</Footer>
       </Layout>
     </Layout>
     </Router>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Table, Spin, Alert } from 'antd';
 
@@ -9,6 +9,8 @@ import './animeList.css';
 const { Column } = Table;
 
 export default function Popular({ category }) {
+    const [currentPage, setPage] = useState(1);
+
     let history = useHistory();
 
     const sortDict = {
@@ -19,7 +21,7 @@ export default function Popular({ category }) {
 
     const DATA = gql`
         query {
-            Page(page: 1, perPage: 50) {
+            Page(page: ${currentPage}, perPage: 50) {
                 media(sort: ${sortDict[category]}) {
                     id
                     coverImage {
@@ -36,7 +38,20 @@ export default function Popular({ category }) {
         }
     `
     
-    const { loading, error, data } = useQuery(DATA);
+    const { loading, error, data, fetchMore } = useQuery(DATA);
+
+    // const loadMore = () => {
+    //     fetchMore({
+    //         variables: { page: 2 },
+    //         updateQuery: (prevResult, { fetchMoreResult }) => {
+    //             if (!fetchMoreResult) return prevResult
+
+    //             return {
+    //                 ...prevResult,
+    //             }
+    //         }
+    //     })
+    // }
 
     if (loading) {
         return (
@@ -56,6 +71,7 @@ export default function Popular({ category }) {
                     dataSource={data.Page.media}
                     pagination={{ 
                         position: ["bottomCenter"],
+                        // onChange: (loadMore())
                     }}
                     onRow={(record, rowIndex) => {
                         let id = record.id;

@@ -1,9 +1,11 @@
-.App {
+/* .App {
   text-align: center;
   min-height: 100vh;
   max-width: 100%;
-}
+} */
 
 .App__sider {
+  overflow: 'auto';
   position: fixed;
+  left: 0;
 }
