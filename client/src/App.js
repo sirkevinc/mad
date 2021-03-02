@@ -43,6 +43,9 @@ function App() {
               <Route path="/search" exact>
                 <SearchPage />
               </Route>
+              <Route path="/search/:query" exact>
+                <SearchPage />
+              </Route>
               <Route path="/anime/:id">
                 <SingleAnime />
               </Route>

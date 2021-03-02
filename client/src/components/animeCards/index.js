@@ -10,7 +10,7 @@ import './animeCards.css';
 const { Meta } = Card;
 
 
-export default function AnimeCards({ category }) {    
+export default function AnimeCards({ category, onLoad, loaded }) {    
     const sortDict = {
         top: 'SCORE_DESC',
         popular: 'POPULARITY_DESC',
@@ -18,27 +18,28 @@ export default function AnimeCards({ category }) {
     }
     
     const LIST_DATA = gql`
-    query {
-        Page(page: 1, perPage: 25) {
-            media(sort: ${sortDict[category]}) {
-                id
-                coverImage {
-                    large
+        query {
+            Page(page: 1, perPage: 25) {
+                media(sort: ${sortDict[category]}) {
+                    id
+                    coverImage {
+                        large
+                    }
+                    title {
+                        english
+                        romaji
+                        native
+                    }
+                    startDate {
+                        year
+                    }
+                    averageScore
+                    genres
                 }
-                title {
-                    english
-                    romaji
-                    native
-                }
-                startDate {
-                    year
-                }
-                averageScore
-                genres
             }
         }
-    }
     `
+
     const navRef = useRef(null);
 
     const handleNav = (direction) => {
@@ -49,13 +50,16 @@ export default function AnimeCards({ category }) {
         }
     }
 
-    const { loading, error, data } = useQuery(LIST_DATA);
+    const { loading, error, data } = useQuery(LIST_DATA, { 
+        onCompleted: () => onLoad()
+    });
     
     if (loading) {
         return (
             <Spin size="large" />
         )
     }
+
     if (error) {
         return (
             <Alert message="Error loading data" type="error" />
@@ -64,6 +68,8 @@ export default function AnimeCards({ category }) {
 
     return (
         <div>
+            {loaded !== 3 ? null : 
+            <div>
             <h2>{category.toUpperCase()}</h2>
             <button onClick={() => handleNav('left')}>Prev</button>
             <div className="animeCards_container" ref={navRef}>
@@ -95,6 +101,7 @@ export default function AnimeCards({ category }) {
                 })}
             </div>
             <button onClick={() => handleNav('right')}>Next</button>
+            </div>}
         </div>
     )
 }

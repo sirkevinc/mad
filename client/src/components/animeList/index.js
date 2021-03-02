@@ -67,7 +67,7 @@ export default function Popular({ category }) {
     return (
         <div className="animeList__container">
             <div className="animeList__table">
-                <Table 
+                <Table
                     dataSource={data.Page.media}
                     pagination={{ 
                         position: ["bottomCenter"],
@@ -79,6 +79,7 @@ export default function Popular({ category }) {
                             onClick: () => history.push(`/anime/${id}`)
                         }
                     }}
+                    rowKey='id'
                 >
                         <Column 
                             title=""

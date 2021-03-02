@@ -1,29 +1,31 @@
-import React, { useState } from 'react';
-import { Input, Table, Spin, Alert } from 'antd';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Input, Spin, Alert } from 'antd';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { useLazyQuery, gql } from '@apollo/client';
+
+import SearchResult from '../components/searchResult';
 
 import './pages.css';
 
 const { Search } = Input;
-const { Column } = Table;
 
 export default function SearchPage() {
-    const [searchTerms, setSearchTerms] = useState("");
+    const { query } = useParams();
+    const [searchTerms, setSearchTerms] = useState(query);
 
     const history = useHistory();
 
-    const GET_SEARCH = gql`
+    const GET_SEARCH_RESULTS = gql`
         query ($search: String!) {
-            Page(page: 1, perPage: 10) {
+            Page(page: 1, perPage: 20) {
                 media(search: $search) {
                     id
                     title {
                         english
                         romaji
                     }
-                    coverImage{
+                    coverImage {
                         large
                     }
                     averageScore
@@ -32,7 +34,17 @@ export default function SearchPage() {
         }
     `
 
-    const [executeSearch, { loading, data, error }] = useLazyQuery(GET_SEARCH);
+    const [executeSearch, { loading, data, error }] = useLazyQuery(GET_SEARCH_RESULTS);
+
+    const handleSearch = () => {
+        executeSearch({ variables: { search: `${searchTerms}`}});
+        history.push(`/search/${searchTerms}`);
+    }
+
+    useEffect(() => {
+        if (!query) return;
+        executeSearch({ variables: { search: `${searchTerms}`}});
+    }, []);
 
     if (loading) {
         return (
@@ -47,55 +59,17 @@ export default function SearchPage() {
 
     return (
         <div>
-            Search
+            <h1>Search</h1>
             <Search
                 placeholder="Input Search"
                 allowClear={true}
                 enterButton="Search"
                 size="large"
-                onSearch={() => executeSearch({ variables: { search: `${searchTerms}`}})}
+                onSearch={() => handleSearch()}
                 onChange={(e) => setSearchTerms(e.target.value)}
             />
-            {data ? 
-            <div className="searchResults">
-                <h1>{data.Page.media.length} Results</h1>
-                <Table 
-                    dataSource={data.Page.media}
-                    pagination={{ 
-                        position: ["bottomCenter"],
-                        // onChange: (loadMore())
-                    }}
-                    onRow={(record, rowIndex) => {
-                        let id = record.id;
-                        return {
-                            onClick: () => history.push(`/anime/${id}`)
-                        }
-                    }}
-                >
-                        <Column 
-                            title=""
-                            key="coverImage"
-                            dataIndex="coverImage"
-                            render={coverImage => (
-                                <img alt="coverImage" src={coverImage.large} />
-                            )}
-                        />
-                        <Column 
-                            title="Title"
-                            key="title"
-                            dataIndex="title"
-                            render={title => (
-                                <>
-                                    {title.english || title.romaji}
-                                </>
-                            )}
-                        />
-                        <Column 
-                            title="Average Score"
-                            key="averageScore"
-                            dataIndex="averageScore"
-                        />
-                </Table>
+            {data ? <div>
+                <SearchResult query={searchTerms} data={data} />
             </div> : null}
         </div>
     )
