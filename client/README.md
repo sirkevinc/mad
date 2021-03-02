@@ -1,7 +1,5 @@
-## Available Scripts
-
 In the project directory, you can run:
-
+### `yarn add`
 ### `yarn start`
 
 Runs the app in the development mode.\
