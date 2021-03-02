@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AnimeList from '../components/animeList';
+import AnimeCards from '../components/animeCards';
 
 export default function Home() {
     const [loading, setLoading] = useState(false);
@@ -8,9 +8,9 @@ export default function Home() {
             <h1>Welcome</h1>
             {loading ? "loading" : 
                 <div>
-                    <AnimeList category={"trending"} />
-                    <AnimeList category={"top"} /> 
-                    <AnimeList category={"popular"} />
+                    <AnimeCards category={"trending"} />
+                    <AnimeCards category={"top"} /> 
+                    <AnimeCards category={"popular"} />
                 </div>
             }
         </div>

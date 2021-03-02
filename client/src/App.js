@@ -11,7 +11,7 @@ import SingleAnime from './pages/singleAnime';
 import Popular from './pages/popular';
 import TopRated from './pages/topRated';
 import Discover from './pages/discover';
-import News from './pages/news';
+import Search from './pages/search';
 import MainNav from './components/mainNav';
 
 import './App.css';
@@ -40,8 +40,8 @@ function App() {
               <Route path="/discover" exact>
                 <Discover />
               </Route>
-              <Route path="/news" exact>
-                <News />
+              <Route path="/search" exact>
+                <Search />
               </Route>
               <Route path="/anime/:id">
                 <SingleAnime />

@@ -59,7 +59,7 @@ export default function SingleAnime(props) {
                 <img alt={"cover"} src={coverImage.large}/>
                 <p>Start Date : {startDate.month}/{startDate.year}</p>
                 <p>Episode Count: {episodes}</p>
-                <ul>Genres: {genres.map(genre => <li>{genre}</li>)}</ul>
+                <ul>Genres: {genres.map(genre => <li key={genre}>{genre}</li>)}</ul>
                 <p>Average User Score: {averageScore}</p>
                 <p>Popularity: {popularity}</p>
             </div>

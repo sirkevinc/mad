@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function News() {
+export default function Search() {
     return (
         <div>
-            News
+            Search
         </div>
     )
 }

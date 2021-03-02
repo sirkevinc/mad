@@ -33,9 +33,9 @@ export default function MainNav(props) {
                     Discover
                 </NavLink>
             </Menu.Item>
-            <Menu.Item key="news">
-                <NavLink to="/news">
-                    News
+            <Menu.Item key="search">
+                <NavLink to="/search">
+                    Search
                 </NavLink>
             </Menu.Item>
         </Menu>

@@ -1,92 +1,94 @@
-import React, { useRef } from 'react';
-import { Card, Popover } from 'antd';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { Table, Spin, Alert } from 'antd';
 
 
 import { useQuery, gql } from '@apollo/client';
 
 import './animeList.css';
+const { Column } = Table;
 
-const { Meta } = Card;
+export default function Popular({ category }) {
+    let history = useHistory();
 
-
-export default function AnimeList({ category, count }) {    
     const sortDict = {
         top: 'SCORE_DESC',
         popular: 'POPULARITY_DESC',
         trending: 'TRENDING_DESC'
     }
-    
-    const LIST_DATA = gql`
-    query {
-        Page(page: 1, perPage: 25) {
-            media(sort: ${sortDict[category]}) {
-                id
-                coverImage {
-                    large
+
+    const DATA = gql`
+        query {
+            Page(page: 1, perPage: 50) {
+                media(sort: ${sortDict[category]}) {
+                    id
+                    coverImage {
+                        large
+                    }
+                    title {
+                        english
+                        romaji
+                        native
+                    }
+                    averageScore
                 }
-                title {
-                    english
-                    romaji
-                    native
-                }
-                startDate {
-                    year
-                }
-                averageScore
-                genres
             }
         }
-    }
     `
-    const navRef = useRef(null);
-
-    const handleNav = (direction) => {
-        if (direction === 'left') {
-            navRef.current.scrollLeft -= 200;
-        } else {
-            navRef.current.scrollLeft += 200;
-        }
-    }
-
-    const { loading, error, data } = useQuery(LIST_DATA);
     
-    if (loading) return "Loading"
-    if(error) return "Error"
+    const { loading, error, data } = useQuery(DATA);
+
+    if (loading) {
+        return (
+            <Spin size="large" />
+        )
+    }
+    if (error) {
+        return (
+            <Alert message="Error loading data" type="error" />
+        )
+    }
 
     return (
-        <div>
-            <h2>{category.toUpperCase()}</h2>
-            <button onClick={() => handleNav('left')}>Prev</button>
-            <div className="animeList_container" ref={navRef}>
-                {data.Page.media.map((entry) => {
-                    let titleEng = entry.title.english;
-                    let titleRom = entry.title.romaji;
-                    let imageLarge = entry.coverImage.large;
-                    return (
-                        <Popover 
-                            className="popover"
-                            title={titleEng || titleRom} 
-                            content={"Content"}
-                            placement={"right"}
-                            key={entry.id}
-                        >
-                        <Link to={`/anime/${entry.id}`}>
-                            <Card
-                                style={{ margin: '2px' }}
-                                className="animeList__item"
-                                loading={loading}
-                                hoverable
-                                cover={<img alt={"title"} src={imageLarge} />}
-                            >
-                                <Meta title={titleEng || titleRom} />
-                            </Card>
-                        </Link>
-                        </Popover>
-                    )
-                })}
+        <div className="animeList__container">
+            <div className="animeList__table">
+                <Table 
+                    dataSource={data.Page.media}
+                    pagination={{ 
+                        position: ["bottomCenter"],
+                    }}
+                    onRow={(record, rowIndex) => {
+                        let id = record.id;
+                        return {
+                            onClick: () => history.push(`/anime/${id}`)
+                        }
+                    }}
+                >
+                        <Column 
+                            title=""
+                            key="coverImage"
+                            dataIndex="coverImage"
+                            render={coverImage => (
+                                <img alt="coverImage" src={coverImage.large} />
+                            )}
+                        />
+                        <Column 
+                            title="Title"
+                            key="title"
+                            dataIndex="title"
+                            render={title => (
+                                <>
+                                    {title.english || title.romaji}
+                                </>
+                            )}
+                        />
+                        <Column 
+                            title="Average Score"
+                            key="averageScore"
+                            dataIndex="averageScore"
+                        />
+                </Table>
             </div>
-            <button onClick={() => handleNav('right')}>Next</button>
         </div>
     )
 }

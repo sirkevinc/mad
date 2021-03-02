@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import AnimeList from '../components/animeList';
 
 export default function Popular() {
     return (
         <div>
-            Popular
+            <h1>Popular</h1>
+            <AnimeList category="popular" />
         </div>
     )
 }

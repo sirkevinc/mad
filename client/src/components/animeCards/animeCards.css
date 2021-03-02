@@ -1,0 +1,23 @@
+.ant-card {
+    margin: 2px;
+}
+.animeCards_container {
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 2px;
+}
+
+.animeCards__item {
+    width: 200px;
+
+}
+
+.animeCards__item img {
+    height: 280px;
+}
+
+.popover {
+}
