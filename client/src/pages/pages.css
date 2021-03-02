@@ -2,3 +2,7 @@
     height: 200px;
     width: 100%;
 }
+
+.searchResults img {
+    width: 50px;
+}
