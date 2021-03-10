@@ -55,7 +55,7 @@ export default function Popular({ category }) {
 
     if (loading) {
         return (
-            <Spin size="large" />
+            <Spin size="large" className="spinner"/>
         )
     }
     if (error) {

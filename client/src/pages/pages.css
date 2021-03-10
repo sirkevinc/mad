@@ -1,13 +1,70 @@
-.singleAnime__header img {
-    height: 200px;
+.ant-spin-lg .ant-spin-dot {
+    position: absolute;
+    font-size: 72px;
+    top: 45%;
+    left: 55%;
+    z-index: 1;
+}
+
+/* Single Anime */
+
+.singleAnime__header-banner img {
+    background-size: cover;
+    height: 250px;
     width: 100%;
 }
+
+.singleAnime__info {
+    min-height: 450px;
+    background-color:white;
+}
+
+.singleAnime__info h1 {
+    font-size: 1.75em;
+    font-weight: 600;
+}
+
+.singleAnime__info-main img {
+    height: 300px;
+}
+
+.singleAnime__info-main {
+    display: flex;
+    width: 100%;
+}
+
+.singleAnime__info-main-Details {
+    margin: 2px 1px 2px 2px;
+}
+
+.singleAnime__info-details {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    margin: 8px 0 4px 10px;
+}
+
+.singleAnime__info-details ul{
+    padding: 1px;
+}
+.singleAnime__info-details li{
+    list-style: none;
+}
+
+
+/* Search */
 
 .searchResults img {
     width: 50px;
 }
-
+/* 
 h1 {
     text-align: center;
     font-size: 1.5em;
+} */
+
+.category_title {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 600;
 }

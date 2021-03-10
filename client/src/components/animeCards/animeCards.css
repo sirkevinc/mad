@@ -1,13 +1,17 @@
 .ant-card {
     margin: 2px;
 }
-.animeCards_container {
+.animeCards__category {
+text-align: center;
+}
+
+.animeCards__container {
     display: flex;
     flex-direction: row;
     max-width: 100%;
     overflow: hidden;
     white-space: nowrap;
-    margin-left: 2px;
+    margin: 4px 2px;
 }
 
 .animeCards__item {
@@ -17,4 +21,17 @@
 
 .animeCards__item img {
     height: 280px;
+}
+
+.animeCards__nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+}
+
+.animeCards__nav-button {
+    font-size: 32px;
+}
+.animeCards__nav-button:hover {
+    color: grey;
 }

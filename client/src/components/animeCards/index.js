@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Card, Popover, Spin, Alert } from 'antd';
+import { CaretLeftFilled, CaretRightFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 
@@ -54,11 +55,11 @@ export default function AnimeCards({ category, onLoad, loaded }) {
         onCompleted: () => onLoad()
     });
     
-    if (loading) {
-        return (
-            <Spin size="large" />
-        )
-    }
+    // if (loading) {
+    //     return (
+    //         <Spin size="large" />
+    //     )
+    // }
 
     if (error) {
         return (
@@ -70,37 +71,52 @@ export default function AnimeCards({ category, onLoad, loaded }) {
         <div>
             {loaded !== 3 ? null : 
             <div>
-            <h2>{category.toUpperCase()}</h2>
-            <button onClick={() => handleNav('left')}>Prev</button>
-            <div className="animeCards_container" ref={navRef}>
-                {data.Page.media.map((entry) => {
-                    let titleEng = entry.title.english;
-                    let titleRom = entry.title.romaji;
-                    let imageLarge = entry.coverImage.large;
-                    return (
-                        <Popover 
-                            className="popover"
-                            title={titleEng || titleRom} 
-                            content={"Content"}
-                            placement={"right"}
-                            key={entry.id}
-                        >
-                            <Link to={`/anime/${entry.id}`}>
-                                <Card
-                                    style={{ margin: '2px' }}
-                                    className="animeCards__item"
-                                    loading={loading}
-                                    hoverable
-                                    cover={<img alt={"title"} src={imageLarge} />}
-                                >
-                                    <Meta title={titleEng || titleRom} />
-                                </Card>
-                            </Link>
-                        </Popover>
-                    )
-                })}
-            </div>
-            <button onClick={() => handleNav('right')}>Next</button>
+                <h2 className="animeCards__category">{category.toUpperCase()}</h2>
+                <div className="animeCards__container" ref={navRef}>
+                    {data.Page.media.map((entry) => {
+                        let titleEng = entry.title.english;
+                        let titleRom = entry.title.romaji;
+                        let imageLarge = entry.coverImage.large;
+                        let averageScore = entry.averageScore;
+                        let startYear = entry.startDate.year;
+                        return (
+                            <Popover 
+                                className="popover"
+                                title={(
+                                    <div>
+                                        <b>{titleEng || titleRom}</b>
+                                    </div>
+                                )} 
+                                content={(
+                                    <div>
+                                        <p>Year Released: {startYear}</p>
+                                        <p>Average Score: {averageScore}</p>
+                                    </div>
+                                )}
+                                placement={"right"}
+                                key={entry.id}
+                            >
+                                <Link to={`/anime/${entry.id}`}>
+                                    <Card
+                                        style={{ margin: '2px' }}
+                                        className="animeCards__item"
+                                        loading={loading}
+                                        hoverable
+                                        cover={<img alt={"title"} src={imageLarge} />}
+                                    >
+                                        <Meta title={titleEng || titleRom} />
+                                    </Card>
+                                </Link>
+                            </Popover>
+                        )
+                    })}
+                </div>
+                <div className="animeCards__nav">
+                    {/* <button onClick={() => handleNav('left')}>Prev</button>
+                    <button onClick={() => handleNav('right')}>Next</button> */}
+                    <CaretLeftFilled className="animeCards__nav-button" onClick={() => handleNav('left')} />
+                    <CaretRightFilled className="animeCards__nav-button" onClick={() => handleNav('right')} />
+                </div>
             </div>}
         </div>
     )

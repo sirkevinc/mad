@@ -4,7 +4,7 @@ import AnimeList from '../components/animeList';
 export default function Discover() {
     return (
         <div>
-            <h1>Discover</h1>
+            <h1 className="category_title">Discover</h1>
             <AnimeList category="trending" />
         </div>
     )

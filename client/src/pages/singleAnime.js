@@ -4,7 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 
 import './pages.css'
 
-export default function SingleAnime(props) {
+export default function SingleAnime() {
     const { id } = useParams();
 
     const ANIME_DATA = gql`
@@ -49,24 +49,32 @@ export default function SingleAnime(props) {
         description
     } = data.Media;
 
+    const createMarkup = () => { 
+        return {__html: `${description}`}; 
+    };
+
     return (
         <div className="singleAnime_container">
             <div className="singleAnime__header">
-                <img alt={"banner"} src={bannerImage}/>
-                <h1>{title.english || title.romaji}</h1>
+                <div className="singleAnime__header-banner">
+                    <img alt={"banner"} src={bannerImage}/>
+                </div>
             </div>
             <div className="singleAnime__info">
-                <img alt={"cover"} src={coverImage.large}/>
-                <p>Start Date : {startDate.month}/{startDate.year}</p>
-                <p>Episode Count: {episodes}</p>
-                <ul>Genres: {genres.map(genre => <li key={genre}>{genre}</li>)}</ul>
-                <p>Average User Score: {averageScore}</p>
-                <p>Popularity: {popularity}</p>
-            </div>
-            <div className="singleAnime__description">
-                <p>
-                    {description}
-                </p>
+                <div className="singleAnime__info-main">
+                    <img alt={"cover"} src={coverImage.large} />
+                    <div className="singleAnime__info-main-Details">
+                        <h1>{title.english || title.romaji}</h1>
+                        <p>Start Date : {startDate.month}/{startDate.year}</p>
+                        <div dangerouslySetInnerHTML={createMarkup()} />
+                    </div>
+                </div>
+                <div className="singleAnime__info-details">
+                    <ul><b>Genres:</b>{genres.map(genre => <li key={genre}>{genre}</li>)}</ul>
+                    <p><b>Episode Count</b>: {episodes}</p>
+                    <p><b>Average User Score</b>: {averageScore}</p>
+                    <p><b>Popularity</b>: {popularity} </p>
+                </div>
             </div>
         </div>
     )
