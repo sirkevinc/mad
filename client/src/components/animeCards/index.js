@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { Card, Popover, Spin, Alert } from 'antd';
+import { Card, Popover, Alert } from 'antd';
+// import { Card, Popover, Spin, Alert } from 'antd';
 import { CaretLeftFilled, CaretRightFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 

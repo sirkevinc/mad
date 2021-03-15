@@ -22,39 +22,39 @@ function App() {
   return (
     <Router>
       <Layout>
-        <Sider className="App__sider">
-          <MainNav />
-        </Sider>
-      <Layout className="App">
-        <Content>
-          <Switch>
-              <Route path="/" exact>
-                <Home />
-              </Route>
-              <Route path="/popular" exact>
-                <Popular />
-              </Route>
-              <Route path="/top" exact>
-                <TopRated />
-              </Route>
-              <Route path="/discover" exact>
-                <Discover />
-              </Route>
-              <Route path="/search" exact>
-                <SearchPage />
-              </Route>
-              <Route path="/search/:query" exact>
-                <SearchPage />
-              </Route>
-              <Route path="/anime/:id">
-                <SingleAnime />
-              </Route>
-              <Redirect to="/" />
-          </Switch>
-        </Content>
-          <Footer style={{ textAlign: 'center' }}>Hello 2020 Created by SirKev</Footer>
+          <Sider className="App__sider">
+            <MainNav />
+          </Sider>
+        <Layout className="App">
+          <Content>
+            <Switch>
+                <Route path="/" exact>
+                  <Home />
+                </Route>
+                <Route path="/popular" exact>
+                  <Popular />
+                </Route>
+                <Route path="/top" exact>
+                  <TopRated />
+                </Route>
+                <Route path="/discover" exact>
+                  <Discover />
+                </Route>
+                <Route path="/search" exact>
+                  <SearchPage />
+                </Route>
+                <Route path="/search/:query" exact>
+                  <SearchPage />
+                </Route>
+                <Route path="/anime/:id">
+                  <SingleAnime />
+                </Route>
+                <Redirect to="/" />
+            </Switch>
+          </Content>
+            <Footer style={{ textAlign: 'center' }}>Hello 2020 Created by SirKev</Footer>
+        </Layout>
       </Layout>
-    </Layout>
     </Router>
   );
 }

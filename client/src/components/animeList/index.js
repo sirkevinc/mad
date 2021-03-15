@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+// import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Table, Spin, Alert } from 'antd';
 
@@ -9,7 +10,7 @@ import './animeList.css';
 const { Column } = Table;
 
 export default function Popular({ category }) {
-    const [currentPage, setPage] = useState(1);
+    // const [currentPage, setPage] = useState(1);
 
     let history = useHistory();
 
@@ -21,7 +22,7 @@ export default function Popular({ category }) {
 
     const DATA = gql`
         query {
-            Page(page: ${currentPage}, perPage: 50) {
+            Page(page: ${1}, perPage: 50) {
                 media(sort: ${sortDict[category]}) {
                     id
                     coverImage {
@@ -38,7 +39,8 @@ export default function Popular({ category }) {
         }
     `
     
-    const { loading, error, data, fetchMore } = useQuery(DATA);
+    const { loading, error, data } = useQuery(DATA);
+    // const { loading, error, data, fetchMore } = useQuery(DATA);
 
     // const loadMore = () => {
     //     fetchMore({

@@ -45,7 +45,7 @@ export default function SingleAnime() {
         genres,
         averageScore,
         popularity,
-        favourites,
+        // favourites,
         description
     } = data.Media;
 

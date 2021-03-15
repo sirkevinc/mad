@@ -43,7 +43,7 @@ export default function SearchPage() {
 
     useEffect(() => {
         if (!query) return;
-        executeSearch({ variables: { search: `${searchTerms}`}});
+        executeSearch({ variables: { search: `${searchTerms}`}}); // eslint-disable-next-line
     }, []);
 
     if (loading) {
