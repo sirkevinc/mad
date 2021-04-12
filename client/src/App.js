@@ -22,7 +22,11 @@ function App() {
   return (
     <Router>
       <Layout>
-          <Sider className="App__sider">
+          <Sider
+            className="App__sider"
+            collapsedWidth="0"
+            breakpoint="md"  
+          >
             <MainNav />
           </Sider>
         <Layout className="App">
@@ -52,7 +56,13 @@ function App() {
                 <Redirect to="/" />
             </Switch>
           </Content>
-            <Footer style={{ textAlign: 'center' }}>Hello 2020 Created by SirKev</Footer>
+            {/* <Footer style={{ 
+              bottom: "0", 
+              textAlign: 'center',
+              width: "100%", 
+                }}>
+                Hello 2020 Created by SirKev
+            </Footer> */}
         </Layout>
       </Layout>
     </Router>

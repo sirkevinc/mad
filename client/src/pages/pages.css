@@ -1,14 +1,76 @@
-.ant-spin-lg .ant-spin-dot {
+/* .ant-spin-lg .ant-spin-dot {
     position: absolute;
     font-size: 72px;
     top: 45%;
     left: 55%;
-    z-index: 1;
-}
+    z-index: 2;
+} */
 
 /* Single Anime */
 
-.singleAnime__header-banner img {
+.singleAnime_container {
+    width: 100%;
+}
+
+/* .singleAnime__header {
+    width: 100%;
+    height: 250px;
+} */
+
+.singleAnime__header img {
+    object-fit: cover;
+    overflow: hidden;
+    height: 250px;
+    width: 100%;
+}
+
+.singleAnime__info {
+    background-color: whitesmoke;
+}
+
+.singleAnime__info h1 {
+    font-size: 1.75em;
+    font-weight: 600;
+}
+
+
+.singleAnime__info-main img {
+    height: 300px;
+}
+
+.singleAnime__info-main {
+    display: flex;
+    width: 100%;
+    height: 325px;
+}
+
+.singleAnime__info-main-Details {
+    margin: 2px 1px 2px 10px;
+}
+
+.singleAnime__info-details {
+    /* display: flex;
+    flex-direction: column;
+    width: 25%; */
+    margin: 8px 0 4px 10px;
+}
+
+.singleAnime__info-details ul{
+    padding: 1px;
+}
+.singleAnime__info-details li{
+    list-style: none;
+}
+
+/* @media screen and (max-width: 620px) {
+    .singleAnime__info-main {
+        display: inline;
+    }
+} */
+
+
+
+/* .singleAnime__header-banner img {
     background-size: cover;
     height: 100%;
     width: 100%;
@@ -58,7 +120,8 @@
     .singleAnime__info-main {
         display: inline;
     }
-  }
+  } */
+
 /* Search */
 
 .searchResults img {

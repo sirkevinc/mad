@@ -6,6 +6,6 @@
 
 /* .App__sider {
   overflow: 'auto';
-  position: fixed;
+  position: absolute;
   left: 0;
 } */

@@ -56,9 +56,7 @@ export default function SingleAnime() {
     return (
         <div className="singleAnime_container">
             <div className="singleAnime__header">
-                <div className="singleAnime__header-banner">
-                    <img alt={"banner"} src={bannerImage}/>
-                </div>
+                <img alt={"banner"} src={bannerImage}/>
             </div>
             <div className="singleAnime__info">
                 <div className="singleAnime__info-main">
