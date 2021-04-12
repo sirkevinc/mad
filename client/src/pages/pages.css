@@ -17,6 +17,8 @@
 .singleAnime__info {
     min-height: 450px;
     background-color:white;
+    position: absolute;
+    top: 275px;
 }
 
 .singleAnime__info h1 {
@@ -39,8 +41,8 @@
 }
 
 .singleAnime__info-details {
-    /* display: flex;
-    flex-direction: column; */
+    display: flex;
+    flex-direction: column;
     width: 25%;
     margin: 8px 0 4px 10px;
 }
